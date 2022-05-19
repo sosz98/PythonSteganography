@@ -32,7 +32,7 @@
 # Przydatne linki:
 # https://en.wikipedia.org/wiki/Steganography
 # https://en.wikipedia.org/wiki/BMP_file_format
-# https://www.geeksforgeeks.org/check-whether-k-th-bit-set-not
+# https://www.geeksforgeeks.org/check-whether-current_exponent-th-bit-set-not
 #
 # Przydatne metody / operatory:
 # https://docs.python.org/3.8/library/stdtypes.html#int.from_bytes
@@ -67,12 +67,12 @@ def extract_message(filename: str) -> str:
 
     list_of_int_values = []
     for element in helplist:
-        k = 7
+        current_exponent = 7
         result = 0
         for x in element:
             var = x % 2
-            result += (var*(2**k))
-            k -= 1
+            result += (var * (2 ** current_exponent))
+            current_exponent -= 1
         list_of_int_values.append(result)
 
     ascii_list = []
@@ -89,7 +89,7 @@ def extract_message(filename: str) -> str:
     var_x = 0
 
     while var_x < len(string_list) - 2:
-        if string_list[var_x] == 'E' and string_list[var_x+1] == 'O' and string_list[var_x+2] == 'F':
+        if string_list[var_x] == 'E' and string_list[var_x + 1] == 'O' and string_list[var_x + 2] == 'F':
             x = var_x
             break
         else:
@@ -98,15 +98,15 @@ def extract_message(filename: str) -> str:
     result_list = []
 
     while x > 0:
-        if ord(string_list[x-1]) >= 32:
-            result_list.insert(0, string_list[x-1])
+        if ord(string_list[x - 1]) >= 32:
+            result_list.insert(0, string_list[x - 1])
         else:
             break
         x -= 1
 
-    resultat = ""
+    str_to_return = ""
     for x in result_list:
-        resultat += x
-    resultat += "EOF"
+        str_to_return += x
+    str_to_return += "EOF"
 
-    return resultat
+    return str_to_return
